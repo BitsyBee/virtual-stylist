@@ -3,6 +3,7 @@ from app.database.base import Base
 
 # Import models
 from app.models.user import User
+from app.models.profile import Profile
 
 Base.metadata.create_all(bind=engine)
 
