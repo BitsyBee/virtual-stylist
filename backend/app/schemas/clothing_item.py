@@ -11,8 +11,12 @@ class ClothingItemCreate(BaseModel):
     fit: str
     material: str
     season: str
+    recommended_skin_tones: str
+    recommended_body_types: str
+    temperature: str
     tags: str | None = None
     image_url: str | None = None
+
 
 
 class ClothingItemUpdate(BaseModel):
@@ -25,5 +29,8 @@ class ClothingItemUpdate(BaseModel):
     fit: str
     material: str
     season: str
+    recommended_skin_tones: str
+    recommended_body_types: str
+    temperature: str
     tags: str | None = None
     image_url: str | None = None

@@ -2,14 +2,11 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
 from app.database.database import get_db
-
 from app.models.profile import Profile
-
 from app.schemas.profile import ProfileCreate
-
 from app.services.dependencies import get_current_user
 
-router = APIRouter(prefix="/profile")
+router = APIRouter(prefix="/profile", tags=["Profile"])
 
 
 @router.post("/")
@@ -24,23 +21,22 @@ def create_profile(
     ).first()
 
     if existing_profile:
-
         return {
             "message": "Profile already exists"
         }
 
     new_profile = Profile(
-    user_id=current_user["user_id"],
-    gender=profile.gender,
-    body_type=profile.body_type,
-    skin_tone=profile.skin_tone,
-    style_preference=profile.style_preference,
-    favorite_colors=profile.favorite_colors
-)
+        user_id=current_user["user_id"],
+        gender=profile.gender,
+        body_type=profile.body_type,
+        skin_tone=profile.skin_tone,
+        style_preference=profile.style_preference,
+        favorite_colors=profile.favorite_colors
+    )
 
     db.add(new_profile)
-
     db.commit()
+    db.refresh(new_profile)
 
     return {
         "message": "Profile created successfully"
@@ -58,3 +54,33 @@ def get_profile(
     ).first()
 
     return profile
+
+
+@router.put("/")
+def update_profile(
+    profile_data: ProfileCreate,
+    db: Session = Depends(get_db),
+    current_user=Depends(get_current_user)
+):
+
+    profile = db.query(Profile).filter(
+        Profile.user_id == current_user["user_id"]
+    ).first()
+
+    if not profile:
+        return {
+            "message": "Profile not found"
+        }
+
+    profile.gender = profile_data.gender
+    profile.body_type = profile_data.body_type
+    profile.skin_tone = profile_data.skin_tone
+    profile.style_preference = profile_data.style_preference
+    profile.favorite_colors = profile_data.favorite_colors
+
+    db.commit()
+    db.refresh(profile)
+
+    return {
+        "message": "Profile updated successfully"
+    }

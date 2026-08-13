@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>Virtual Stylist</title>
+
+<link rel="stylesheet" href="style.css">
+```
+
+</head>
+
+<body>
+
+```
+<div class="container">
+
+    <h1>Virtual Stylist</h1>
+
+
+    <!-- =========================
+         LOGIN
+    ========================== -->
+
+    <div id="loginSection" class="chat-box">
+
+        <h2>Login</h2>
+
+        <input
+            type="email"
+            id="email"
+            placeholder="Email"
+        >
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Password"
+        >
+
+        <button onclick="login()">
+            Login
+        </button>
+
+        <p id="loginResult"></p>
+
+    </div>
+
+
+    <!-- =========================
+         STYLIST
+    ========================== -->
+
+    <div id="stylistSection"
+         class="chat-box"
+         style="display: none;">
+
+        <p class="subtitle">
+            Tell me what you are dressing for.
+        </p>
+
+        <textarea
+            id="userMessage"
+            placeholder="Example: I have a job interview tomorrow. It will be hot and I want to look professional."
+        ></textarea>
+
+        <button onclick="getRecommendation()">
+            Get Recommendation
+        </button>
+
+        <button onclick="logout()">
+            Logout
+        </button>
+    </div>
+
+
+    <!-- =========================
+         PROFILE
+    ========================== -->
+
+    <div id="profileSection"
+         class="profile-section"
+         style="display: none;">
+
+        <h2>My Profile</h2>
+
+        <p class="profile-subtitle">
+            Your profile helps Virtual Stylist personalize
+            your recommendations.
+        </p>
+
+        <p id="profileMessage"></p>
+
+
+        <div class="profile-grid">
+
+            <!-- Gender -->
+
+            <div>
+
+                <label for="profileGender">
+                    Gender
+                </label>
+
+                <select id="profileGender">
+
+                    <option value="">
+                        Select gender
+                    </option>
+
+                    <option value="Male">
+                        Male
+                    </option>
+
+                    <option value="Female">
+                        Female
+                    </option>
+
+                    <option value="Unisex">
+                        Unisex
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- Skin Tone -->
+
+            <div>
+
+                <label for="profileSkinTone">
+                    Skin Tone
+                </label>
+
+                <select id="profileSkinTone">
+
+                    <option value="">
+                        Select skin tone
+                    </option>
+
+                    <option value="Fair">
+                        Fair
+                    </option>
+
+                    <option value="Medium">
+                        Medium
+                    </option>
+
+                    <option value="Deep">
+                        Deep
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- Body Type -->
+
+            <div>
+
+                <label for="profileBodyType">
+                    Body Type
+                </label>
+
+                <select id="profileBodyType">
+
+                    <option value="">
+                        Select body type
+                    </option>
+
+                    <option value="Slim">
+                        Slim
+                    </option>
+
+                    <option value="Average">
+                        Average
+                    </option>
+
+                    <option value="Athletic">
+                        Athletic
+                    </option>
+
+                    <option value="Broad">
+                        Broad
+                    </option>
+
+                    <option value="Plus Size">
+                        Plus Size
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- Style -->
+
+            <div>
+
+                <label for="profileStyle">
+                    Style Preference
+                </label>
+
+                <select id="profileStyle">
+
+                    <option value="">
+                        Select style
+                    </option>
+
+                    <option value="Casual">
+                        Casual
+                    </option>
+
+                    <option value="Formal">
+                        Formal
+                    </option>
+
+                    <option value="Smart Casual">
+                        Smart Casual
+                    </option>
+
+                    <option value="Sport">
+                        Sport
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <!-- Favorite Colors -->
+
+        <div class="profile-field">
+
+            <label for="profileColors">
+                Favorite Colors
+            </label>
+
+            <input
+                type="text"
+                id="profileColors"
+                placeholder="Example: Blue, Black, White"
+            >
+
+        </div>
+
+
+        <button onclick="loadProfile()">
+            Load My Profile
+        </button>
+        <button onclick="saveProfile()">
+            Save Profile
+        </button>
+    </div>
+
+
+    <!-- =========================
+         RECOMMENDATIONS
+    ========================== -->
+
+    <div id="result"></div>
+
+</div>
+
+
+<script src="app.js"></script>
+```
+
+</body>
+
+</html>
+

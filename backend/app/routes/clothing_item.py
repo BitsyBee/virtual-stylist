@@ -30,6 +30,9 @@ def create_clothing_item(
         fit=item.fit,
         material = item.material,
         season=item.season,
+        recommended_skin_tones=item.recommended_skin_tones,
+        recommended_body_types=item.recommended_body_types,
+        temperature=item.temperature,
         tags=item.tags,
         image_url=item.image_url
     )
@@ -86,6 +89,9 @@ def update_clothing_item(
     clothing.fit = item.fit
     clothing.material = item.material 
     clothing.season = item.season
+    clothing.recommended_skin_tones = item.recommended_skin_tones
+    clothing.recommended_body_types = item.recommended_body_types
+    clothing.temperature = item.temperature
     clothing.tags = item.tags
     clothing.image_url = item.image_url
 

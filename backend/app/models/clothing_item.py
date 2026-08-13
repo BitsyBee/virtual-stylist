@@ -25,6 +25,12 @@ class ClothingItem(Base):
 
     season = Column(String, nullable=False)
 
+    recommended_skin_tones = Column(String)
+
+    recommended_body_types = Column(String)
+
+    temperature = Column(String)
+
     tags = Column(String)
 
     image_url = Column(String)

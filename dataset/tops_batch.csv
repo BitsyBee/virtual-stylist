@@ -1,0 +1,49 @@
+name,category,gender,color,style,occasion,fit,season,material,tags,image_url
+White Oxford Shirt,Top,Male,White,Smart Casual,Presentation,Slim Fit,All Season,Cotton,"professional,classic,cotton",images/tops/white_oxford_shirt.jpg
+Black Oxford Shirt,Top,Male,Black,Smart Casual,Presentation,Slim Fit,All Season,Cotton,"professional,classic,cotton",images/tops/black_oxford_shirt.jpg
+Blue Oxford Shirt,Top,Male,Blue,Smart Casual,Presentation,Slim Fit,All Season,Cotton,"professional,classic,cotton",images/tops/blue_oxford_shirt.jpg
+Light Blue Oxford Shirt,Top,Male,Light Blue,Smart Casual,Presentation,Slim Fit,All Season,Cotton,"professional,classic,cotton",images/tops/light_blue_oxford_shirt.jpg
+Grey Oxford Shirt,Top,Male,Grey,Smart Casual,Presentation,Slim Fit,All Season,Cotton,"professional,classic,cotton",images/tops/grey_oxford_shirt.jpg
+Navy Oxford Shirt,Top,Male,Navy,Smart Casual,Presentation,Slim Fit,All Season,Cotton,"professional,classic,cotton",images/tops/navy_oxford_shirt.jpg
+Olive Oxford Shirt,Top,Male,Olive,Smart Casual,Presentation,Slim Fit,All Season,Cotton,"professional,classic,cotton",images/tops/olive_oxford_shirt.jpg
+Beige Oxford Shirt,Top,Male,Beige,Smart Casual,Presentation,Slim Fit,All Season,Cotton,"professional,classic,cotton",images/tops/beige_oxford_shirt.jpg
+White Dress Shirt,Top,Male,White,Formal,Interview,Slim Fit,All Season,Cotton,"formal,professional,office",images/tops/white_dress_shirt.jpg
+Black Dress Shirt,Top,Male,Black,Formal,Interview,Slim Fit,All Season,Cotton,"formal,professional,office",images/tops/black_dress_shirt.jpg
+Blue Dress Shirt,Top,Male,Blue,Formal,Interview,Slim Fit,All Season,Cotton,"formal,professional,office",images/tops/blue_dress_shirt.jpg
+Light Blue Dress Shirt,Top,Male,Light Blue,Formal,Interview,Slim Fit,All Season,Cotton,"formal,professional,office",images/tops/light_blue_dress_shirt.jpg
+Grey Dress Shirt,Top,Male,Grey,Formal,Interview,Slim Fit,All Season,Cotton,"formal,professional,office",images/tops/grey_dress_shirt.jpg
+Navy Dress Shirt,Top,Male,Navy,Formal,Interview,Slim Fit,All Season,Cotton,"formal,professional,office",images/tops/navy_dress_shirt.jpg
+Olive Dress Shirt,Top,Male,Olive,Formal,Interview,Slim Fit,All Season,Cotton,"formal,professional,office",images/tops/olive_dress_shirt.jpg
+Beige Dress Shirt,Top,Male,Beige,Formal,Interview,Slim Fit,All Season,Cotton,"formal,professional,office",images/tops/beige_dress_shirt.jpg
+White Polo Shirt,Top,Male,White,Casual,University,Regular Fit,Summer,Cotton,"casual,comfortable,daily",images/tops/white_polo_shirt.jpg
+Black Polo Shirt,Top,Male,Black,Casual,University,Regular Fit,Summer,Cotton,"casual,comfortable,daily",images/tops/black_polo_shirt.jpg
+Blue Polo Shirt,Top,Male,Blue,Casual,University,Regular Fit,Summer,Cotton,"casual,comfortable,daily",images/tops/blue_polo_shirt.jpg
+Light Blue Polo Shirt,Top,Male,Light Blue,Casual,University,Regular Fit,Summer,Cotton,"casual,comfortable,daily",images/tops/light_blue_polo_shirt.jpg
+Grey Polo Shirt,Top,Male,Grey,Casual,University,Regular Fit,Summer,Cotton,"casual,comfortable,daily",images/tops/grey_polo_shirt.jpg
+Navy Polo Shirt,Top,Male,Navy,Casual,University,Regular Fit,Summer,Cotton,"casual,comfortable,daily",images/tops/navy_polo_shirt.jpg
+Olive Polo Shirt,Top,Male,Olive,Casual,University,Regular Fit,Summer,Cotton,"casual,comfortable,daily",images/tops/olive_polo_shirt.jpg
+Beige Polo Shirt,Top,Male,Beige,Casual,University,Regular Fit,Summer,Cotton,"casual,comfortable,daily",images/tops/beige_polo_shirt.jpg
+White Crew Neck T-Shirt,Top,Male,White,Casual,Casual Outing,Regular Fit,Summer,Cotton,"minimal,casual,everyday",images/tops/white_crew_neck_t-shirt.jpg
+Black Crew Neck T-Shirt,Top,Male,Black,Casual,Casual Outing,Regular Fit,Summer,Cotton,"minimal,casual,everyday",images/tops/black_crew_neck_t-shirt.jpg
+Blue Crew Neck T-Shirt,Top,Male,Blue,Casual,Casual Outing,Regular Fit,Summer,Cotton,"minimal,casual,everyday",images/tops/blue_crew_neck_t-shirt.jpg
+Light Blue Crew Neck T-Shirt,Top,Male,Light Blue,Casual,Casual Outing,Regular Fit,Summer,Cotton,"minimal,casual,everyday",images/tops/light_blue_crew_neck_t-shirt.jpg
+Grey Crew Neck T-Shirt,Top,Male,Grey,Casual,Casual Outing,Regular Fit,Summer,Cotton,"minimal,casual,everyday",images/tops/grey_crew_neck_t-shirt.jpg
+Navy Crew Neck T-Shirt,Top,Male,Navy,Casual,Casual Outing,Regular Fit,Summer,Cotton,"minimal,casual,everyday",images/tops/navy_crew_neck_t-shirt.jpg
+Olive Crew Neck T-Shirt,Top,Male,Olive,Casual,Casual Outing,Regular Fit,Summer,Cotton,"minimal,casual,everyday",images/tops/olive_crew_neck_t-shirt.jpg
+Beige Crew Neck T-Shirt,Top,Male,Beige,Casual,Casual Outing,Regular Fit,Summer,Cotton,"minimal,casual,everyday",images/tops/beige_crew_neck_t-shirt.jpg
+White Henley,Top,Male,White,Smart Casual,Travel,Regular Fit,All Season,Cotton,"comfortable,travel,modern",images/tops/white_henley.jpg
+Black Henley,Top,Male,Black,Smart Casual,Travel,Regular Fit,All Season,Cotton,"comfortable,travel,modern",images/tops/black_henley.jpg
+Blue Henley,Top,Male,Blue,Smart Casual,Travel,Regular Fit,All Season,Cotton,"comfortable,travel,modern",images/tops/blue_henley.jpg
+Light Blue Henley,Top,Male,Light Blue,Smart Casual,Travel,Regular Fit,All Season,Cotton,"comfortable,travel,modern",images/tops/light_blue_henley.jpg
+Grey Henley,Top,Male,Grey,Smart Casual,Travel,Regular Fit,All Season,Cotton,"comfortable,travel,modern",images/tops/grey_henley.jpg
+Navy Henley,Top,Male,Navy,Smart Casual,Travel,Regular Fit,All Season,Cotton,"comfortable,travel,modern",images/tops/navy_henley.jpg
+Olive Henley,Top,Male,Olive,Smart Casual,Travel,Regular Fit,All Season,Cotton,"comfortable,travel,modern",images/tops/olive_henley.jpg
+Beige Henley,Top,Male,Beige,Smart Casual,Travel,Regular Fit,All Season,Cotton,"comfortable,travel,modern",images/tops/beige_henley.jpg
+White Crew Sweater,Top,Male,White,Smart Casual,Office,Regular Fit,Winter,Wool,"warm,office,winter",images/tops/white_crew_sweater.jpg
+Black Crew Sweater,Top,Male,Black,Smart Casual,Office,Regular Fit,Winter,Wool,"warm,office,winter",images/tops/black_crew_sweater.jpg
+Blue Crew Sweater,Top,Male,Blue,Smart Casual,Office,Regular Fit,Winter,Wool,"warm,office,winter",images/tops/blue_crew_sweater.jpg
+Light Blue Crew Sweater,Top,Male,Light Blue,Smart Casual,Office,Regular Fit,Winter,Wool,"warm,office,winter",images/tops/light_blue_crew_sweater.jpg
+Grey Crew Sweater,Top,Male,Grey,Smart Casual,Office,Regular Fit,Winter,Wool,"warm,office,winter",images/tops/grey_crew_sweater.jpg
+Navy Crew Sweater,Top,Male,Navy,Smart Casual,Office,Regular Fit,Winter,Wool,"warm,office,winter",images/tops/navy_crew_sweater.jpg
+Olive Crew Sweater,Top,Male,Olive,Smart Casual,Office,Regular Fit,Winter,Wool,"warm,office,winter",images/tops/olive_crew_sweater.jpg
+Beige Crew Sweater,Top,Male,Beige,Smart Casual,Office,Regular Fit,Winter,Wool,"warm,office,winter",images/tops/beige_crew_sweater.jpg
