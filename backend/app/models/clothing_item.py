@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, Float
 from app.database.base import Base
 
 
@@ -34,3 +34,9 @@ class ClothingItem(Base):
     tags = Column(String)
 
     image_url = Column(String)
+
+    buy_url = Column(String)          # live link to the product on the retailer's site
+
+    brand = Column(String)            
+    
+    price = Column(Float, nullable=True)   

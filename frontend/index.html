@@ -1,280 +1,423 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>AURA — AI Virtual Stylist & Outfit Finder</title>
 
-```
-<title>Virtual Stylist</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="style.css">
-```
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-```
-<div class="container">
+<!-- ================= NAVIGATION ================= -->
+<header class="navbar" id="mainNav">
+    <div class="nav-container">
+        <a href="#" class="brand-logo" onclick="showLanding()">
+            AURA <span>STYLIST</span>
+        </a>
 
-    <h1>Virtual Stylist</h1>
+        <div class="nav-controls">
+            <!-- Dark Mode Toggle -->
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <i class="fas fa-moon"></i>
+            </button>
 
+            <nav class="nav-links" id="publicNav">
+                <a href="#about" onclick="showLanding()">About</a>
+                <a href="#features" onclick="showLanding()">Features</a>
+                <button class="btn btn-outline" onclick="openAuthModal('login')">
+                    <i class="fas fa-sign-in-alt"></i> Sign In
+                </button>
+                <button class="btn btn-primary" onclick="openAuthModal('signup')">
+                    Get Started
+                </button>
+            </nav>
 
-    <!-- =========================
-         LOGIN
-    ========================== -->
+            <nav class="nav-links" id="privateNav" style="display:none;">
+                <button class="nav-tab active" id="tabStylist" onclick="switchAppView('stylist')">
+                    <i class="fas fa-robot"></i> AI Assistant
+                </button>
+                <button class="nav-tab" id="tabFavorites" onclick="switchAppView('favorites')">
+                    <i class="fas fa-heart"></i> Saved Outfits
+                </button>
+                <button class="nav-tab" id="tabProfile" onclick="switchAppView('profile')">
+                    <i class="fas fa-user"></i> Profile
+                </button>
+                <button class="btn btn-ghost" onclick="logout()">
+                    Sign Out
+                </button>
+            </nav>
 
-    <div id="loginSection" class="chat-box">
-
-        <h2>Login</h2>
-
-        <input
-            type="email"
-            id="email"
-            placeholder="Email"
-        >
-
-        <input
-            type="password"
-            id="password"
-            placeholder="Password"
-        >
-
-        <button onclick="login()">
-            Login
-        </button>
-
-        <p id="loginResult"></p>
-
+            <!-- Mobile menu toggle -->
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
     </div>
 
-
-    <!-- =========================
-         STYLIST
-    ========================== -->
-
-    <div id="stylistSection"
-         class="chat-box"
-         style="display: none;">
-
-        <p class="subtitle">
-            Tell me what you are dressing for.
-        </p>
-
-        <textarea
-            id="userMessage"
-            placeholder="Example: I have a job interview tomorrow. It will be hot and I want to look professional."
-        ></textarea>
-
-        <button onclick="getRecommendation()">
-            Get Recommendation
-        </button>
-
-        <button onclick="logout()">
-            Logout
-        </button>
+    <!-- Mobile menu dropdown -->
+    <div class="mobile-menu" id="mobileMenu" style="display:none;">
+        <div id="mobilePublicNav">
+            <a href="#about" onclick="showLanding(); closeMobileMenu();">About</a>
+            <a href="#features" onclick="showLanding(); closeMobileMenu();">Features</a>
+            <button class="btn btn-outline btn-full" onclick="openAuthModal('login'); closeMobileMenu();">Sign In</button>
+            <button class="btn btn-primary btn-full" onclick="openAuthModal('signup'); closeMobileMenu();">Get Started</button>
+        </div>
+        <div id="mobilePrivateNav" style="display:none;">
+            <button class="nav-tab active" onclick="switchAppView('stylist'); closeMobileMenu();">
+                <i class="fas fa-robot"></i> AI Assistant
+            </button>
+            <button class="nav-tab" onclick="switchAppView('favorites'); closeMobileMenu();">
+                <i class="fas fa-heart"></i> Saved Outfits
+            </button>
+            <button class="nav-tab" onclick="switchAppView('profile'); closeMobileMenu();">
+                <i class="fas fa-user"></i> Profile
+            </button>
+            <button class="btn btn-ghost btn-full" onclick="logout(); closeMobileMenu();">Sign Out</button>
+        </div>
     </div>
+</header>
 
+<!-- ================= LANDING PAGE ================= -->
+<main id="landingPage" class="landing-page">
 
-    <!-- =========================
-         PROFILE
-    ========================== -->
-
-    <div id="profileSection"
-         class="profile-section"
-         style="display: none;">
-
-        <h2>My Profile</h2>
-
-        <p class="profile-subtitle">
-            Your profile helps Virtual Stylist personalize
-            your recommendations.
-        </p>
-
-        <p id="profileMessage"></p>
-
-
-        <div class="profile-grid">
-
-            <!-- Gender -->
-
-            <div>
-
-                <label for="profileGender">
-                    Gender
-                </label>
-
-                <select id="profileGender">
-
-                    <option value="">
-                        Select gender
-                    </option>
-
-                    <option value="Male">
-                        Male
-                    </option>
-
-                    <option value="Female">
-                        Female
-                    </option>
-
-                    <option value="Unisex">
-                        Unisex
-                    </option>
-
-                </select>
-
+    <!-- Hero Section -->
+    <section class="hero-section hero-fullbleed">
+        <div class="hero-bg-image"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <span class="eyebrow eyebrow-light">
+                    <i class="fas fa-sparkles"></i> AI-Powered Curations
+                </span>
+                <h1>Outfits Curated <br>Just for You</h1>
+                <p>
+                    AURA analyzes your style profile, body type, and occasion to build
+                    complete looks sourced from premium retailers like GFLOCK.
+                </p>
+                <div class="hero-actions">
+                    <button class="btn btn-primary btn-lg" onclick="handleStartStyling()">
+                        Start Styling <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <a href="#features" class="btn btn-outline btn-outline-light btn-lg">
+                        Explore <i class="fas fa-compass"></i>
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <span><strong>10k+</strong> Outfits</span>
+                    <span><strong>500+</strong> Brands</span>
+                    <span><strong>98%</strong> Satisfaction</span>
+                </div>
             </div>
 
-
-            <!-- Skin Tone -->
-
-            <div>
-
-                <label for="profileSkinTone">
-                    Skin Tone
-                </label>
-
-                <select id="profileSkinTone">
-
-                    <option value="">
-                        Select skin tone
-                    </option>
-
-                    <option value="Fair">
-                        Fair
-                    </option>
-
-                    <option value="Medium">
-                        Medium
-                    </option>
-
-                    <option value="Deep">
-                        Deep
-                    </option>
-
-                </select>
-
+            <div class="hero-floating-badge">
+                <div class="badge-icon"><i class="fas fa-shopping-bag"></i></div>
+                <div>
+                    <p class="badge-title">Live Retail Sourcing</p>
+                    <p class="badge-sub">Real items from top fashion brands</p>
+                </div>
             </div>
-
-
-            <!-- Body Type -->
-
-            <div>
-
-                <label for="profileBodyType">
-                    Body Type
-                </label>
-
-                <select id="profileBodyType">
-
-                    <option value="">
-                        Select body type
-                    </option>
-
-                    <option value="Slim">
-                        Slim
-                    </option>
-
-                    <option value="Average">
-                        Average
-                    </option>
-
-                    <option value="Athletic">
-                        Athletic
-                    </option>
-
-                    <option value="Broad">
-                        Broad
-                    </option>
-
-                    <option value="Plus Size">
-                        Plus Size
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <!-- Style -->
-
-            <div>
-
-                <label for="profileStyle">
-                    Style Preference
-                </label>
-
-                <select id="profileStyle">
-
-                    <option value="">
-                        Select style
-                    </option>
-
-                    <option value="Casual">
-                        Casual
-                    </option>
-
-                    <option value="Formal">
-                        Formal
-                    </option>
-
-                    <option value="Smart Casual">
-                        Smart Casual
-                    </option>
-
-                    <option value="Sport">
-                        Sport
-                    </option>
-
-                </select>
-
-            </div>
-
         </div>
 
+        <!-- Scroll indicator -->
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
 
-        <!-- Favorite Colors -->
+    <!-- Outfit of the Day -->
+    <section class="otd-section">
+        <div class="section-header">
+            <span class="eyebrow"><i class="fas fa-star"></i> Editor's Pick</span>
+            <h2>Outfit of the Day</h2>
+            <p>Handpicked by our AI stylist for today's trending vibe</p>
+        </div>
+        <div class="otd-card" id="otdCard">
+            <div class="otd-image">
+                <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=600" alt="Outfit of the day">
+                <span class="otd-badge">Trending</span>
+            </div>
+            <div class="otd-info">
+                <h3>Modern Layered Look</h3>
+                <p>Beige trench coat · White tee · Straight denim · Leather sneakers</p>
+                <div class="otd-meta">
+                    <span><i class="fas fa-tag"></i> Smart Casual</span>
+                    <span><i class="fas fa-thermometer-half"></i> Spring / Fall</span>
+                </div>
+                <button class="btn btn-primary" onclick="fillPrompt('Show me more outfits like this modern layered look with a trench coat and denim.')">
+                    Get Similar <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
 
-        <div class="profile-field">
+    <!-- Features -->
+    <section id="features" class="features-section">
+        <div class="section-header">
+            <span class="eyebrow"><i class="fas fa-cogs"></i> Intelligent Design</span>
+            <h2>How Virtual Styling Works</h2>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-user-check"></i></div>
+                <div class="feature-num">01</div>
+                <h3>Style Profile Setup</h3>
+                <p>Define your body type, skin undertone, and aesthetic preferences once.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-comment-dots"></i></div>
+                <div class="feature-num">02</div>
+                <h3>Context Sourcing</h3>
+                <p>Enter any query — from casual beach outings to formal job interviews.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-store"></i></div>
+                <div class="feature-num">03</div>
+                <h3>Direct Retail Checkout</h3>
+                <p>Click on curated tops, bottoms, or shoes to buy them at source stores.</p>
+            </div>
+        </div>
+    </section>
 
-            <label for="profileColors">
-                Favorite Colors
-            </label>
+    <!-- Trending Styles -->
+    <section class="trending-section">
+        <div class="section-header">
+            <span class="eyebrow"><i class="fas fa-fire"></i> Trending Now</span>
+            <h2>Style Inspirations</h2>
+        </div>
+        <div class="trending-grid" id="trendingGrid">
+            <!-- Filled by JS -->
+        </div>
+    </section>
 
-            <input
-                type="text"
-                id="profileColors"
-                placeholder="Example: Blue, Black, White"
-            >
+    <!-- CTA Footer -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Ready to Transform Your Wardrobe?</h2>
+            <p>Join thousands of users getting personalized outfit recommendations daily.</p>
+            <button class="btn btn-primary btn-lg" onclick="handleStartStyling()">
+                Get Started Free <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </section>
+</main>
 
+<!-- ================= AUTH MODAL ================= -->
+<div id="authModal" class="modal-backdrop" style="display:none;">
+    <div class="modal-card">
+        <button class="modal-close" onclick="closeAuthModal()">&times;</button>
+
+        <!-- Login Form -->
+        <div id="loginForm" class="auth-form">
+            <span class="eyebrow"><i class="fas fa-sign-in-alt"></i> Welcome Back</span>
+            <h2>Sign In to AURA</h2>
+            <div class="field">
+                <label for="loginEmail"><i class="fas fa-envelope"></i> Email Address</label>
+                <input type="email" id="loginEmail" placeholder="name@example.com">
+            </div>
+            <div class="field">
+                <label for="loginPassword"><i class="fas fa-lock"></i> Password</label>
+                <input type="password" id="loginPassword" placeholder="••••••••">
+            </div>
+            <button class="btn btn-primary btn-full" onclick="login()">
+                <i class="fas fa-arrow-right"></i> Sign In
+            </button>
+            <p class="auth-toggle-text">Don't have an account? <a href="#" onclick="toggleAuthMode('signup')">Create one</a></p>
+            <p id="loginResult" class="hint-error"></p>
         </div>
 
-
-        <button onclick="loadProfile()">
-            Load My Profile
-        </button>
-        <button onclick="saveProfile()">
-            Save Profile
-        </button>
+        <!-- Signup Form -->
+        <div id="signupForm" class="auth-form" style="display:none;">
+            <span class="eyebrow"><i class="fas fa-user-plus"></i> Join the Concierge</span>
+            <h2>Create Your Account</h2>
+            <div class="field">
+                <label for="signupName"><i class="fas fa-user"></i> Full Name</label>
+                <input type="text" id="signupName" placeholder="Jane Doe">
+            </div>
+            <div class="field">
+                <label for="signupEmail"><i class="fas fa-envelope"></i> Email Address</label>
+                <input type="email" id="signupEmail" placeholder="name@example.com">
+            </div>
+            <div class="field">
+                <label for="signupPassword"><i class="fas fa-lock"></i> Password</label>
+                <input type="password" id="signupPassword" placeholder="••••••••">
+            </div>
+            <button class="btn btn-primary btn-full" onclick="signup()">
+                <i class="fas fa-user-plus"></i> Create Account
+            </button>
+            <p class="auth-toggle-text">Already registered? <a href="#" onclick="toggleAuthMode('login')">Sign in</a></p>
+            <p id="signupResult" class="hint-error"></p>
+        </div>
     </div>
-
-
-    <!-- =========================
-         RECOMMENDATIONS
-    ========================== -->
-
-    <div id="result"></div>
-
 </div>
 
+<!-- ================= TOAST NOTIFICATION ================= -->
+<div id="toastContainer" class="toast-container"></div>
+
+<!-- ================= APP SHELL ================= -->
+<div id="appShell" class="app-shell" style="display:none;">
+    <div class="app-container">
+
+        <!-- ===== STYLIST VIEW ===== -->
+        <section id="stylistSection" class="view-panel">
+            <div class="stylist-header">
+                <span class="eyebrow"><i class="fas fa-robot"></i> AI Fashion Stylist</span>
+                <h1 id="stylistWelcome">Describe your occasion</h1>
+                <p id="stylistSubtext">Tell AURA where you're going, climate details, or desired moods.</p>
+            </div>
+
+            <!-- Style Preference Quick Picker -->
+            <div class="preference-picker">
+                <span class="picker-label">Quick Preferences:</span>
+                <div class="picker-group">
+                    <button class="picker-chip" data-pref="formality" data-value="casual" onclick="setPreference('formality','casual')">
+                        <i class="fas fa-tshirt"></i> Casual
+                    </button>
+                    <button class="picker-chip" data-pref="formality" data-value="formal" onclick="setPreference('formality','formal')">
+                        <i class="fas fa-user-tie"></i> Formal
+                    </button>
+                    <button class="picker-chip" data-pref="formality" data-value="smart" onclick="setPreference('formality','smart')">
+                        <i class="fas fa-blazer"></i> Smart Casual
+                    </button>
+                    <button class="picker-chip" data-pref="season" data-value="summer" onclick="setPreference('season','summer')">
+                        <i class="fas fa-sun"></i> Summer
+                    </button>
+                    <button class="picker-chip" data-pref="season" data-value="winter" onclick="setPreference('season','winter')">
+                        <i class="fas fa-snowflake"></i> Winter
+                    </button>
+                </div>
+                <div class="selected-prefs" id="selectedPrefs"></div>
+            </div>
+
+            <div class="chat-container">
+                <div class="chip-row">
+                    <button class="chip" onclick="fillPrompt('I have an upcoming corporate job interview, keep it chic and formal.')">
+                        <i class="fas fa-briefcase"></i> Interview
+                    </button>
+                    <button class="chip" onclick="fillPrompt('Evening party at a rooftop lounge in hot weather.')">
+                        <i class="fas fa-wine-glass-alt"></i> Rooftop Party
+                    </button>
+                    <button class="chip" onclick="fillPrompt('Casual smart office wear for tropical summer weather.')">
+                        <i class="fas fa-building"></i> Summer Workwear
+                    </button>
+                    <button class="chip" onclick="fillPrompt('Relaxed weekend outdoor brunch with friends.')">
+                        <i class="fas fa-mug-saucer"></i> Weekend Brunch
+                    </button>
+                </div>
+
+                <div class="chat-log" id="chatLog">
+                    <div class="bubble bubble-stylist">
+                        <i class="fas fa-robot"></i> Welcome back. Let me know what event or outfit mood you are preparing for today.
+                    </div>
+                    <div id="result"></div>
+                </div>
+
+                <div class="chat-input-bar">
+                    <textarea id="userMessage" placeholder="e.g. I need an outfit for an evening dinner date at GFLOCK style..." rows="1"></textarea>
+                    <button class="send-btn" onclick="getRecommendation()">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SAVED OUTFITS (FAVORITES) VIEW ===== -->
+        <section id="favoritesSection" class="view-panel" style="display:none;">
+            <div class="profile-header">
+                <span class="eyebrow"><i class="fas fa-heart"></i> Your Collection</span>
+                <h1>Saved Outfits</h1>
+                <p>Every outfit you've hearted from your AI Stylist, all in one place.</p>
+            </div>
+
+            <div class="favorites-grid" id="favoritesGrid">
+                <!-- Populated by JS -->
+                <div class="favorites-empty">
+                    <i class="fas fa-heart" style="font-size:48px; color:var(--text-muted);"></i>
+                    <p>No saved outfits yet. Start saving your favorite looks!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== PROFILE VIEW ===== -->
+        <section id="profileSection" class="view-panel" style="display:none;">
+            <div class="profile-header">
+                <span class="eyebrow"><i class="fas fa-user"></i> Client Profile</span>
+                <h1>Personal Style Profile</h1>
+                <p id="profileMessage">Save your parameters so our algorithms can personalize retail items to your look.</p>
+            </div>
+
+            <div class="card profile-card">
+                <div class="profile-grid">
+                    <div class="field">
+                        <label for="profileGender"><i class="fas fa-venus-mars"></i> Gender</label>
+                        <select id="profileGender">
+                            <option value="">Select</option>
+                            <option value="Female">Female</option>
+                            <option value="Male">Male</option>
+                            <option value="Unisex">Unisex</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="profileSkinTone"><i class="fas fa-palette"></i> Skin Tone</label>
+                        <select id="profileSkinTone">
+                            <option value="">Select</option>
+                            <option value="Fair">Fair</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Deep">Deep</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="profileBodyType"><i class="fas fa-people-arrows"></i> Body Frame</label>
+                        <select id="profileBodyType">
+                            <option value="">Select</option>
+                            <option value="Slim">Slim</option>
+                            <option value="Average">Average</option>
+                            <option value="Athletic">Athletic</option>
+                            <option value="Broad">Broad</option>
+                            <option value="Plus Size">Plus Size</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="profileStyle"><i class="fas fa-star"></i> Primary Aesthetic</label>
+                        <select id="profileStyle">
+                            <option value="">Select</option>
+                            <option value="Casual">Casual</option>
+                            <option value="Formal">Formal</option>
+                            <option value="Smart Casual">Smart Casual</option>
+                            <option value="Sport">Sport</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="profileColors"><i class="fas fa-fill-drip"></i> Preferred Colors (comma-separated)</label>
+                    <input type="text" id="profileColors" placeholder="e.g. Beige, Black, Navy, White">
+                </div>
+
+                <div class="btn-row">
+                    <button class="btn btn-outline" onclick="loadProfile()">
+                        <i class="fas fa-sync"></i> Reload
+                    </button>
+                    <button class="btn btn-primary" onclick="saveProfile()">
+                        <i class="fas fa-save"></i> Save Preferences
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</div>
 
 <script src="app.js"></script>
-```
-
 </body>
-
 </html>
 

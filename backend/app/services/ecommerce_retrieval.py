@@ -1,96 +1,254 @@
-import requests
-from bs4 import BeautifulSoup
-from urllib.parse import urljoin
+from app.services.ecommerce.gflock import (
+    GflockProvider
+)
+
+from app.services.ecommerce.kapruka import (
+    KaprukaProvider
+)
+
+from app.services.ecommerce.neverbe import (
+    get_live_neverbe_products
+)
 
 
-GFLOCK_BASE_URL = "https://gflock.lk"
+# ============================================================
+# PROVIDERS
+# ============================================================
+# Note: Neverbe is not included here because it uses a
+# function-based interface (get_live_neverbe_products) rather
+# than the class-based EcommerceProvider interface used by
+# Gflock and Kapruka. It is called separately below, since it
+# is currently the only provider that supplies shoe products.
+
+PROVIDERS = [
+
+    GflockProvider(),
+
+    KaprukaProvider()
+
+]
 
 
-# ---------------------------------------------------------
-# GFLOCK COLLECTIONS
-# ---------------------------------------------------------
+# ============================================================
+# NORMALIZATION
+# ============================================================
 
-GFLOCK_COLLECTIONS = {
-    "men_shirts": "/collections/mens-shirts",
-    "men_tshirts": "/collections/mens-t-shirts",
-    "men_pants": "/collections/mens-trousers",
-    "men_jeans": "/collections/mens-jeans",
-}
+def normalize_product(product):
 
+    return {
 
-# ---------------------------------------------------------
-# GET PRODUCTS FROM GFLOCK COLLECTION
-# ---------------------------------------------------------
+        "name":
+            product.get("name"),
 
-def get_gflock_products(collection: str, limit: int = 20):
+        "brand":
+            product.get("brand"),
 
-    if collection not in GFLOCK_COLLECTIONS:
-        raise ValueError(
-            f"Unknown GFLOCK collection: {collection}"
-        )
+        "source":
+            product.get("source"),
 
-    url = urljoin(
-        GFLOCK_BASE_URL,
-        GFLOCK_COLLECTIONS[collection]
-    )
+        "category":
+            product.get("category"),
 
-    response = requests.get(
-        url,
-        headers={
-            "User-Agent": (
-                "Mozilla/5.0 "
-                "(Macintosh; Intel Mac OS X 10_15_7) "
-                "AppleWebKit/537.36 "
-                "(KHTML, like Gecko) "
-                "Chrome/120.0 Safari/537.36"
+        "gender": product.get(
+            "gender",
+            "Unisex"
+        ),    
+
+        "color":
+            product.get("color"),
+
+        "style":
+            product.get("style"),
+
+        "price":
+            product.get("price"),
+
+        "currency":
+            product.get(
+                "currency",
+                "LKR"
+            ),
+
+        "image_url":
+            product.get("image_url"),
+
+        "product_url":
+            product.get("product_url"),
+
+        "description":
+            product.get("description"),
+
+        "sizes":
+            product.get("sizes"),
+
+        "availability":
+            product.get(
+                "availability",
+                "Unknown"
+            ),
+
+        "inventory_quantity":
+            product.get(
+                "inventory_quantity"
             )
-        },
-        timeout=15
+    }
+
+
+# ============================================================
+# LIVE MULTI-STORE RETRIEVAL
+# ============================================================
+
+def get_live_ecommerce_products(
+    categories=None,
+    per_provider=10
+):
+
+    if categories is None:
+
+        categories = [
+            "Top",
+            "Bottom",
+            "Shoes"
+        ]
+
+    all_products = []
+
+    print(
+        "\n===================================="
     )
 
-    response.raise_for_status()
-
-    soup = BeautifulSoup(
-        response.text,
-        "html.parser"
+    print(
+        "LIVE MULTI-STORE RETRIEVAL"
     )
 
-    products = []
-
-    # Shopify product cards
-    product_links = soup.select(
-        'a[href*="/products/"]'
+    print(
+        "===================================="
     )
 
-    seen_urls = set()
+    for provider in PROVIDERS:
 
-    for link in product_links:
-
-        product_url = urljoin(
-            GFLOCK_BASE_URL,
-            link.get("href")
+        print(
+            f"\nProvider: {provider.name}"
         )
 
-        if product_url in seen_urls:
-            continue
+        try:
 
-        seen_urls.add(product_url)
+            products = provider.get_products(
+                categories=categories,
+                limit=per_provider
+            )
 
-        product_name = link.get_text(
-            " ",
-            strip=True
+            for product in products:
+
+                normalized = (
+                    normalize_product(
+                        product
+                    )
+                )
+
+                all_products.append(
+                    normalized
+                )
+
+                print(
+                    f"  ✓ "
+                    f"{normalized['name']} "
+                    f"[{normalized['category']}] "
+                    f"({normalized['source']})"
+                )
+
+        except Exception as error:
+
+            print(
+                f"  ✗ "
+                f"{provider.name} failed: "
+                f"{error}"
+            )
+
+    # --------------------------------------------------------
+    # Neverbe (shoe-specific, function-based provider)
+    # --------------------------------------------------------
+
+    if "Shoes" in categories:
+
+        print(
+            "\nProvider: Neverbe"
         )
 
-        if not product_name:
-            continue
+        try:
 
-        products.append({
-            "name": product_name,
-            "product_url": product_url,
-            "source": "GFLOCK"
-        })
+            neverbe_results = get_live_neverbe_products(
+                per_category=per_provider
+            )
 
-        if len(products) >= limit:
-            break
+            for product in neverbe_results.get("Shoes", []):
 
-    return products
+                product.setdefault("source", "Neverbe")
+                product.setdefault("brand", "Neverbe")
+                product.setdefault("category", "Shoes")
+
+                normalized = normalize_product(product)
+
+                all_products.append(normalized)
+
+                print(
+                    f"  ✓ "
+                    f"{normalized['name']} "
+                    f"[Shoes] "
+                    f"(Neverbe)"
+                )
+
+        except Exception as error:
+
+            print(
+                f"  ✗ Neverbe failed: {error}"
+            )
+
+    print(
+        "\n===================================="
+    )
+
+    print(
+        f"TOTAL PRODUCTS: "
+        f"{len(all_products)}"
+    )
+
+    print(
+        "===================================="
+    )
+
+    return all_products
+
+
+# ============================================================
+# GROUP BY CATEGORY
+# ============================================================
+
+def group_products_by_category(
+    products
+):
+
+    grouped = {
+
+        "Top": [],
+
+        "Bottom": [],
+
+        "Shoes": []
+    }
+
+    for product in products:
+
+        category = product.get(
+            "category"
+        )
+
+        if category in grouped:
+
+            grouped[
+                category
+            ].append(
+                product
+            )
+
+    return grouped

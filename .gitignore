@@ -216,3 +216,14 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Backup files
+*_backup.py
+*_backup.sql
+*_backup.csv
+*.bak
+
+# Project context / AI context files
+project_context.txt
+projectcontext.txt
+projectcontext2.txt

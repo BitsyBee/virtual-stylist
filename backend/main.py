@@ -7,6 +7,8 @@ from app.routes.auth import router as auth_router
 from app.routes.profile import router as profile_router
 from app.routes.clothing_item import router as clothing_router
 from app.routes.recommendation import router as recommendation_router
+from app.routes.favorite import router as favorite_router        
+from app.routes.chat_history import router as chat_history_router 
 
 
 app = FastAPI(
@@ -39,6 +41,8 @@ app.include_router(auth_router)
 app.include_router(profile_router)
 app.include_router(clothing_router)
 app.include_router(recommendation_router)
+app.include_router(favorite_router)          
+app.include_router(chat_history_router) 
 
 
 @app.get("/")
