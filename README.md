@@ -23,7 +23,7 @@ backend/requirements.txt
 #  Clone the Repository
 
 ```bash
-git clone <YOUR_GITHUB_REPOSITORY_URL>
+git clone <GITHUB_REPOSITORY_URL>
 ```
 
 Then:
