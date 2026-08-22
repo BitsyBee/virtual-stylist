@@ -43,7 +43,7 @@
 
             <nav class="nav-links" id="privateNav" style="display:none;">
                 <button class="nav-tab active" id="tabStylist" onclick="switchAppView('stylist')">
-                    <i class="fas fa-robot"></i> AI Assistant
+                    <i class="fas fa-robot"></i> Aura Stylist
                 </button>
                 <button class="nav-tab" id="tabFavorites" onclick="switchAppView('favorites')">
                     <i class="fas fa-heart"></i> Saved Outfits
@@ -73,7 +73,7 @@
         </div>
         <div id="mobilePrivateNav" style="display:none;">
             <button class="nav-tab active" onclick="switchAppView('stylist'); closeMobileMenu();">
-                <i class="fas fa-robot"></i> AI Assistant
+                <i class="fas fa-robot"></i> Aura Stylist
             </button>
             <button class="nav-tab" onclick="switchAppView('favorites'); closeMobileMenu();">
                 <i class="fas fa-heart"></i> Saved Outfits
@@ -96,7 +96,7 @@
         <div class="hero-container">
             <div class="hero-content">
                 <span class="eyebrow eyebrow-light">
-                    <i class="fas fa-sparkles"></i> AI-Powered Curations
+                    <i class="fas fa-sparkles"></i> Aura
                 </span>
                 <h1>Outfits Curated <br>Just for You</h1>
                 <p>
@@ -139,7 +139,7 @@
         <div class="section-header">
             <span class="eyebrow"><i class="fas fa-star"></i> Editor's Pick</span>
             <h2>Outfit of the Day</h2>
-            <p>Handpicked by our AI stylist for today's trending vibe</p>
+            <p>Handpicked by our Virtual stylist for today's trending vibe</p>
         </div>
         <div class="otd-card" id="otdCard">
             <div class="otd-image">
@@ -237,7 +237,7 @@
 
         <!-- Signup Form -->
         <div id="signupForm" class="auth-form" style="display:none;">
-            <span class="eyebrow"><i class="fas fa-user-plus"></i> Join the Concierge</span>
+            <span class="eyebrow"><i class="fas fa-user-plus"></i> Meet Your Virtual Stylist ..</span>
             <h2>Create Your Account</h2>
             <div class="field">
                 <label for="signupName"><i class="fas fa-user"></i> Full Name</label>
@@ -270,7 +270,7 @@
         <!-- ===== STYLIST VIEW ===== -->
         <section id="stylistSection" class="view-panel">
             <div class="stylist-header">
-                <span class="eyebrow"><i class="fas fa-robot"></i> AI Fashion Stylist</span>
+                <span class="eyebrow"><i class="fas fa-robot"></i> Aura Stylist</span>
                 <h1 id="stylistWelcome">Describe your occasion</h1>
                 <p id="stylistSubtext">Tell AURA where you're going, climate details, or desired moods.</p>
             </div>
@@ -322,7 +322,7 @@
                 </div>
 
                 <div class="chat-input-bar">
-                    <textarea id="userMessage" placeholder="e.g. I need an outfit for an evening dinner date at GFLOCK style..." rows="1"></textarea>
+                    <textarea id="userMessage" placeholder="e.g. I need an outfit for an evening dinner date ..." rows="1"></textarea>
                     <button class="send-btn" onclick="getRecommendation()">
                         <i class="fas fa-paper-plane"></i>
                     </button>

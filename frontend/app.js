@@ -788,6 +788,7 @@ async function loadChatHistoryFromBackend() {
             html += `<div class="bubble bubble-stylist">${escapeHtml(data.message || 'No outfits found.')}</div>`;
         }
     }
+    html += `<div id="result"></div>`;
     chatLog.innerHTML = html;
     chatLog.scrollTop = chatLog.scrollHeight;
 }
